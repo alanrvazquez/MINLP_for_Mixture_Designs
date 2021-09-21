@@ -1,0 +1,39 @@
+B 2 C o m p i l a t i o n
+B 260 Include File Summary
+B 279 Model Statistics    SOLVE I_opt Using MINLP From line 240
+B 297 Solution Report     SOLVE I_opt Using MINLP From line 240
+F 320 vec_fim1
+F 332 vec_fim2
+F 344 vec_fim3
+F 356 ord_x
+F 367 symm_fim
+F 375 mat_fim
+F 389 eq_l
+F 400 eq_u1
+F 408 chol_sta
+F 416 ing_avail
+F 424 ord_nw
+F 435 const_mixt
+F 445 est_model1
+F 446 est_model2
+F 447 est_model3
+F 457 lin_iav_1
+F 483 lin_iav_2
+F 509 lin_iav_3
+F 535 eq_innod
+F 546 eq_india
+F 554 eq_psd
+F 568 eq_invlu
+F 574 eq_avp
+F 582 chol_sta_inv
+F 590 symm_iv
+G 593 x
+G 619 dif_th
+G 645 fim_th
+G 659 iv
+G 673 lm
+G 687 linv
+G 701 avpI
+G 707 z
+G 733 y
+B 754 E x e c u t i o n

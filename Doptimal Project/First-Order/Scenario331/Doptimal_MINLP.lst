@@ -1,0 +1,237 @@
+GAMS 26.1.0  rf2b37b9 Released Feb  2, 2019 WEX-WEI x86 64bit/MS Windows 06/11/19 16:10:04 Page 1
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+C o m p i l a t i o n
+
+
+   1  option limrow=0;
+   2  * 'number of cases output in the LST file for each named var.'
+   3  option limcol=0;
+   4  * # number of decimals being displayed in the output
+   5  option decimals=8;
+   6  * # lmit time: 4 hours for NEOS
+   7  option reslim=14400;
+   8   
+   9  * # Force a compilation error if GAMS Rev 240 or higher is not used
+  11   
+  12  * Definitions:
+  13  * ------------
+  14  * Number of parameters
+  18  * Data sets:
+  19  * ----------
+  20  SET      np      'number of support points'      /1*19/;
+  21  SET      nth     'number of parameters'          /1*3/;
+  22  SET      nv      'number of variables'           /1*3/;
+  23  alias(np1,np);
+  24  alias(nth1,nth2, nth);
+  25   
+  26  * Parameters:
+  27  *------------
+  28  PARAMETER        npz             'max. number of points total',
+  29                   Ring(nv)         'Ingredient availability.'
+  30                   lambda          'Amount of mixture for one experimental r
+      un'
+  31                   BigM            'limit'
+  32                   par(np)         'parameters - local values';
+  33  Ring('1')        =       10.2;
+  34  Ring('2')        =       4.0;
+  35  Ring('3')        =       4.9;
+  36  lambda           =       1;
+  37  npz              =       card(np);
+  38  BigM             =       npz;
+  39   
+  40  * Variables:
+  41  *-----------
+  42  VARIABLES
+  43  x(nv,np)         'variable x - positions of the design points',
+  44  dif_th(nth,np)   'derivatives wrt parameters',
+  45  fim_th(nth,nth)  'FIM'
+  46  lm(nth,nth)      'matrix L'
+  47  detA             'determinant'
+  48  z(nv,np)         'variable z - products of binary and continuous variables
+      '
+  49   
+  50   
+  51  * Binary Variables:
+  52  BINARY VARIABLES
+  53  y(np) 'variables y - decision of including design point or not';
+  54   
+  55  EQUATIONS
+  56  vec_fim1(np)           'parameter column',
+  57  vec_fim2(np)           'parameter column',
+  58  vec_fim3(np)           'parameter column',
+  59   
+  60  mat_fim(nth,nth)       'terms of the FIM after summing'
+  61   
+  62  * eq for D-optimality (and E-optimality)
+  63  eq_l(nth,nth)          'terms of L matrix'
+  64  eq_u1(nth,nth)         'terms of L matrix =0'
+  65  symm_fim(nth,nth)      'Symmetry of the FIM'
+  66   
+  67  chol_sta(nth,nth)      'Cholesky factorization stability criteria'
+  68   
+  69  * eq for mixtures
+  70  const_mixt(np)         'constraints on mixtures'
+  71  ing_avail(nv)         'ingredient availability constraints'
+  72   
+  73  * eq for linearizing quadratic constraint (ingredient availability const.)
+  74  lin_iav_1(nv, np)        'linearization of ingredient availability const.'
+  75  lin_iav_2(nv, np)
+  76  lin_iav_3(nv, np)
+  77   
+  78  * others
+  79  ord_nw(np)             'ordering points constraint'
+  80  est_model1         'model must be estimable'
+  81  est_model2         'model must be estimable'
+  82  est_model3         'model must be estimable'
+  83  ord_x(np)              'ordering of the proportions of the ingredient'
+  84  eq_det                 'determinant computation - D-optimality'
+  85  ;
+  86   
+  87  * Equations:
+  88  *-----------
+  89  * derivatives wrt parameters
+  90  vec_fim1(np)  ..       dif_th('1',np) =e=   x('1',np);
+  91  vec_fim2(np)  ..       dif_th('2',np) =e=   x('2',np);
+  92  vec_fim3(np)  ..       dif_th('3',np) =e=   x('3',np);
+  93   
+  94  * FIM
+  95  mat_fim(nth,nth1).. fim_th(nth, nth1) =e=
+  96    sum[np,(y(np)/npz)*dif_th(nth, np)*dif_th(nth1,np)];
+  97   
+  98  * Symmetry of FIM
+  99  symm_fim(nth,nth1)$(nth.ord lt nth1.ord).. fim_th(nth,nth1) =e= fim_th(nth
+      1,nth);
+ 100   
+ 101  * Cholesky L*L^T decomposition for A-, D- and E-optimality
+ 102  eq_l(nth,nth1)$(nth.ord ge nth1.ord).. fim_th(nth,nth1)  =e=
+ 103    sum[nth2,lm(nth,nth2)*lm(nth1,nth2)];
+ 104  eq_u1(nth,nth1)$(nth.ord lt nth1.ord).. lm(nth,nth1) =e= 0;
+ 105   
+ 106  * Condition for numerical stability in Cholesky factorization
+ 107  chol_sta(nth,nth).. fim_th(nth,nth) =g= sum[nth1$(nth1.ord lt nth.ord),sqr
+      [lm(nth,nth1)]];
+ 108   
+ 109  * Mixture runs must sum to one
+ 110  const_mixt(np) .. sum[nv, x(nv,np)] =e= 1;
+ 111   
+ 112  * Ingredient availability constraints
+ 113  ing_avail(nv) .. sum[np, lambda*z(nv,np)] =l= Ring(nv);
+ 114  lin_iav_1(nv, np) .. z(nv,np) =l= y(np);
+ 115  lin_iav_2(nv, np) .. z(nv,np) =l= x(nv,np);
+ 116  lin_iav_3(nv, np) .. z(nv,np) =g= x(nv,np) - (1 - y(np));
+ 117   
+ 118  * ordering constraint
+ 119  ord_nw(np)$(np.ord gt 1).. y(np) =l= y(np-1);
+ 120   
+ 121  * Model must be estimable
+ 122  est_model1 .. y('1') =e= 1;
+ 123  est_model2 .. y('2') =e= 1;
+ 124  est_model3 .. y('3') =e= 1;
+ 125   
+ 126  * ordering the components constraint
+ 127  ord_x(np)$(np.ord gt 1).. x('1',np) =g= x('1',np-1);
+ 128   
+ 129  * equation for det. computation - for D-optimality
+ 130  eq_det.. detA =e= sum[nth, log[lm(nth,nth)]];
+ 131   
+ 132  * problem
+ 133  model COMMON /vec_fim1, vec_fim2, vec_fim3, symm_fim, ord_x,
+ 134                mat_fim, eq_l, eq_u1, chol_sta, ing_avail, ord_nw,
+ 135                const_mixt, est_model1, est_model2, est_model3,
+ 136                lin_iav_1, lin_iav_2, lin_iav_3/;
+ 137  * model for D-optimal designs
+ 138  model D_opt /COMMON,eq_det/;
+ 139   
+ 140  * parameters for solving
+ 141  option optcr = 1.0e-5;
+ 142  option optca = 1.0e-6;
+ 143  option iterlim = 2000000000;
+ 144  option domlim = 1000;
+ 145  option rminlp = conopt4;
+ 146  option minlp = scip;
+ 147  *option nlp = ipopt;
+ 148  option bratio = 1;
+ 149  option decimals = 8;
+ 150  D_opt.optfile = 1;
+ 151   
+ 152  * initial values
+ 153  $macro ResetboundsOnYforD
+ 154  x.lo('1',np)            =       0.3;
+ 155  x.lo('2',np)            =       0.0;
+ 156  x.lo('3',np)            =       0.2;
+ 157  x.up('1',np)            =       1.0;
+ 158  x.up('2',np)            =       1.0;
+ 159  x.up('3',np)            =       1.0;
+ 160   
+ 161  * Product variables
+ 162  z.lo('1',np)            =       0.0;
+ 163  z.lo('2',np)            =       0.0;
+ 164  z.lo('3',np)            =       0.0;
+ 165  z.up('1',np)            =       1.0;
+ 166  z.up('2',np)            =       1.0;
+ 167  z.up('3',np)            =       1.0;
+ 168   
+ 169  * Initial parameters
+ 170  dif_th.lo(nth,np1)      =       -0.1;
+ 171  dif_th.up(nth,np1)      =       1.1;
+ 172   
+ 173  fim_th.lo(nth, nth1)    =       -0.1;
+ 174  fim_th.up(nth, nth1)    =       1.1;
+ 175   
+ 176  * initialization for D-optimality
+ 177  lm.lo(nth,nth1)         =       -1;
+ 178  lm.lo(nth,nth)          =       1.0e-5;
+ 179  lm.up(nth,nth1)         =       1;
+ 180   
+ 181   
+ 182  detA.lo = -50.0;
+ 183  detA.up = 50.0;
+ 184   
+ 185  D_opt.scaleopt = 1;
+ 186   
+ 187  * saving results
+ 188  parameters
+ 189  xsol(nv, np)         'save solutions for points for all 3 criteria',
+ 190  nsol(np)             'save solutions for n for all 3 criteria',
+ 191  opt                  'save optimal value'
+ 192  modelstat            'save the status of the model'
+ 193  time                 'save the CPU time'
+ 194   
+ 195  * solution for D-optimality
+ 196  solve D_opt using minlp maximizing detA;
+ 197  xsol(nv, np)        =       x.l(nv, np);
+ 198  nsol(np)            =       y.l(np);
+ 199  opt                 =       detA.l;
+ 200  modelstat           =       D_opt.modelstat;
+ 201  time                =       D_opt.resusd;
+
+
+COMPILATION TIME     =        0.000 SECONDS      3 MB  26.1.0 rf2b37b9 WEX-WEI
+GAMS 26.1.0  rf2b37b9 Released Feb  2, 2019 WEX-WEI x86 64bit/MS Windows 06/11/19 16:10:04 Page 2
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Model Statistics    SOLVE D_opt Using MINLP From line 196
+
+
+MODEL STATISTICS
+
+BLOCKS OF EQUATIONS          19     SINGLE EQUATIONS          314
+BLOCKS OF VARIABLES           7     SINGLE VARIABLES          209  41 projected
+NON ZERO ELEMENTS         1,219     NON LINEAR N-Z            489
+DERIVATIVE POOL              20     CONSTANT POOL              17
+CODE LENGTH                 964     DISCRETE VARIABLES         19
+
+
+
+**** THE MODEL EXCEEDS THE DEMO LIMITS
+**** MAX MATRIX ROWS          300
+**** MAX MATRIX COLUMNS       300
+**** MAX NON ZERO ELEMENTS   2000
+**** MAX NON LINEAR N-Z      1000
+**** MAX DISCRETE VARIABLES    50
+**** Terminated due to a licensing error
+
+     GAMS Development Corporation, USA              G871201/0000CA-ANY
+     Free Demo, +1 202-342-0180, support@gams.com, www.gams.com       
+     10523532000S                                                   00
+     01234567000000                                                   
+     DC0000       Ref: Generated by Base            A Demo            

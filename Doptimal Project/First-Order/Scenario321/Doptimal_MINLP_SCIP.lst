@@ -1,0 +1,564 @@
+GAMS 25.1.3  r4e34d435fbd Released Oct 30, 2018 WEX-WEI x86 64bit/MS Windows 04/02/19 17:40:44 Page 1
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+C o m p i l a t i o n
+
+
+   1  option limrow=0;
+   2  * 'number of cases output in the LST file for each named var.'
+   3  option limcol=0;
+   4  * # number of decimals being displayed in the output
+   5  option decimals=8;
+   6  * # lmit time: 4 hours for NEOS
+   7  option reslim=14400;
+   8   
+   9  * # Force a compilation error if GAMS Rev 240 or higher is not used
+  11   
+  12  * Definitions:
+  13  * ------------
+  14  * Number of parameters
+  18  * Data sets:
+  19  * ----------
+  20  SET      np      'number of support points'      /1*13/;
+  21  SET      nth     'number of parameters'          /1*3/;
+  22  SET      nv      'number of variables'           /1*3/;
+  23  alias(np1,np);
+  24  alias(nth1,nth2, nth);
+  25   
+  26  * Parameters:
+  27  *------------
+  28  PARAMETER        npz             'max. number of points total',
+  29                   Ring(nv)               'Ingredient availability.'
+  30                   lambda          'Amount of mixture for one experimental r
+      un'
+  31                   BigM            'limit'
+  32                   par(np)         'parameters - local values';
+  33  Ring('1')        =       4.0;
+  34  Ring('2')        =       4.0;
+  35  Ring('3')        =       5.0;
+  36  lambda           =       1;
+  37  npz              =       card(np);
+  38  BigM             =       npz;
+  39   
+  40  * Variables:
+  41  *-----------
+  42  VARIABLES
+  43  x(nv,np)         'variable x - positions of the design points',
+  44  dif_th(nth,np)   'derivatives wrt parameters',
+  45  fim_th(nth,nth)  'FIM'
+  46  lm(nth,nth)      'matrix L'
+  47  detA             'determinant'
+  48   
+  49  * Binary Variables:
+  50  BINARY VARIABLES
+  51  y(np) 'variables y - decision of including support point or not';
+  52   
+  53  EQUATIONS
+  54  vec_fim1(np)           'derivatives',
+  55  vec_fim2(np)           'derivatives',
+  56  vec_fim3(np)           'derivatives',
+  57  vec_fim4(np)           'derivatives',
+  58  vec_fim5(np)           'derivatives',
+  59  vec_fim6(np)           'derivatives',
+  60   
+  61  mat_fim(nth,nth)       'terms of the FIM after summing'
+  62   
+  63  * eq for D-optimality (and E-optimality)
+  64  eq_l(nth,nth)          'terms of L matrix'
+  65  eq_u1(nth,nth)         'terms of L matrix =0'
+  66   
+  67  chol_sta(nth,nth)      'Cholesky factorization stability criteria'
+  68   
+  69  * eq for mixtures
+  70  const_mixt(np)         'constraints on mixtures'
+  71  ing_avail(nv)         'ingredient availability constraints'
+  72   
+  73  * others
+  74  ord_nw(np)             'ordering points constraint'
+  75  eq_det                 'determinant computation - D-optimality'
+  76  ;
+  77   
+  78  * Equations:
+  79  *-----------
+  80  * derivatives wrt parameters
+  81  vec_fim1(np)  ..       dif_th('1',np) =e=   x('1',np);
+  82  vec_fim2(np)  ..       dif_th('2',np) =e=   x('2',np);
+  83  vec_fim3(np)  ..       dif_th('3',np) =e=   x('3',np);
+  84  *vec_fim4(np)  ..       dif_th('4',np) =e=   x('1',np)*x('2',np);
+  85  *vec_fim5(np)  ..       dif_th('5',np) =e=   x('1',np)*x('3',np);
+  86  *vec_fim6(np)  ..       dif_th('6',np) =e=   x('2',np)*x('3',np);
+  87   
+  88  * FIM
+  89  mat_fim(nth,nth1).. fim_th(nth, nth1) =e=
+  90    sum[np,(y(np)/npz)*dif_th(nth, np)*dif_th(nth1,np)];
+  91  **             nw(np)
+  92  * Cholesky L*L^T decomposition for A-, D- and E-optimality
+  93  eq_l(nth,nth1)$(nth.ord ge nth1.ord).. fim_th(nth,nth1)  =e=
+  94    sum[nth2,lm(nth,nth2)*lm(nth1,nth2)];
+  95  eq_u1(nth,nth1)$(nth.ord lt nth1.ord).. lm(nth,nth1) =e= 0;
+  96   
+  97  * Condition for numerical stability in Cholesky factorization
+  98  chol_sta(nth,nth).. fim_th(nth,nth) =g= sum[nth1$(nth1.ord lt nth.ord),sqr
+      [lm(nth,nth1)]];
+  99   
+ 100  * Mixture runs must sum to one
+ 101  const_mixt(np) .. sum[nv, x(nv,np)] =e= 1;
+ 102   
+ 103  * Ingredient availability constraints
+ 104  ing_avail(nv) .. sum[np, lambda*y(np)*x(nv,np)] =l= Ring(nv);
+ 105   
+ 106  * ordering constraint
+ 107  ord_nw(np)$(np.ord gt 1).. y(np) - y(np-1) =g= 0;
+ 108   
+ 109  * equation for det. computation - for D-optimality
+ 110  eq_det.. detA =e= sum[nth, log[lm(nth,nth)]];
+ 111   
+ 112  * problem
+ 113  model COMMON /vec_fim1, vec_fim2, vec_fim3,
+ 114                mat_fim, eq_l, eq_u1, chol_sta, ing_avail, ord_nw,
+ 115                const_mixt/;
+ 116  * model for D-optimal designs
+ 117  model D_opt /COMMON,eq_det/;
+ 118   
+ 119  * parameters for solving
+ 120  option optcr = 1.0e-5;
+ 121  option optca = 1.0e-6;
+ 122  option iterlim = 2000000000;
+ 123  option domlim = 1000;
+ 124  option rminlp = conopt4;
+ 125  option minlp = scip;
+ 126  option nlp = ipopt;
+ 127  option bratio = 1;
+ 128  option decimals = 8;
+ 129  D_opt.optfile = 1;
+ 130   
+ 131  * initial values
+ 132  $macro ResetboundsOnYforD
+ 133  x.lo('1',np)            =       0.0;
+ 134  x.lo('2',np)            =       0.0;
+ 135  x.lo('3',np)            =       0.0;
+ 136  x.up('1',np)            =       1.0;
+ 137  x.up('2',np)            =       1.0;
+ 138  x.up('3',np)            =       1.0;
+ 139   
+ 140  * Initial design.
+ 141  parameters Dguess(nv, np), yguess(np), Lguess(nth,nth1);
+GDXIN   C:\Users\AVazquezAlcocer.AD\Dropbox\SDP for Constructing Designs\MINL_PR
+        OBLEMS\Mixture\First-Order\Scenario321\in.gdx
+--- LOAD  Dguess = 1:Dguess
+--- LOAD  yguess = 2:yguess
+--- LOAD  Lguess = 3:Lguess
+ 145  ;
+ 146  x.l(nv,np) = Dguess(nv,np);
+ 147  y.l(np)       =      yguess(np);
+ 148   
+ 149  * Initial parameters
+ 150  dif_th.lo(nth,np1)      =       -0.1;
+ 151  dif_th.up(nth,np1)      =       1.1;
+ 152  dif_th.l('1',np)        =       x.l('1',np);
+ 153  dif_th.l('2',np)        =       x.l('2',np);
+ 154  dif_th.l('3',np)        =       x.l('3',np);;
+ 155  *dif_th.l('4',np)        =       x.l('1',np)*x.l('2',np);
+ 156  *dif_th.l('5',np)        =       x.l('1',np)*x.l('3',np);
+ 157  *dif_th.l('6',np)        =       x.l('2',np)*x.l('3',np);
+ 158   
+ 159  fim_th.lo(nth, nth1)    =       -0.1;
+ 160  fim_th.up(nth, nth1)    =       npz+0.1;
+ 161  fim_th.l(nth,nth1)      =       sum(np, (y.l(np)/npz)*
+ 162                                  dif_th.l(nth, np)*dif_th.l(nth1,np));
+ 163   
+ 164  * initialization for D-optimality
+ 165  lm.lo(nth,nth1)         =       -(sqrt(npz) + 1);
+ 166  lm.lo(nth,nth)          =       1.0e-5;
+ 167  lm.up(nth,nth1)         =       sqrt(npz) + 1;
+ 168  lm.l(nth,nth1)          = Lguess(nth,nth1);
+ 169   
+ 170   
+ 171  detA.lo = -50.0;
+ 172  detA.up = 50.0;
+ 173   
+ 174  D_opt.scaleopt = 1;
+ 175   
+ 176  * saving results
+ 177  parameters
+ 178  xsol(nv, np)         'save solutions for points for all 3 criteria',
+ 179  nsol(np)             'save solutions for n for all 3 criteria',
+ 180  opt                  'save optimal value'
+ 181  modelstat            'save the status of the model'
+ 182  time                 'save the CPU time'
+ 183   
+ 184  * solution for D-optimality
+ 185  solve D_opt using minlp maximizing detA;
+ 186  xsol(nv, np)        =       x.l(nv, np);
+ 187  nsol(np)            =       y.l(np);
+ 188  opt                 =       detA.l;
+ 189  modelstat           =       D_opt.modelstat;
+ 190  time                =       D_opt.resusd;
+GAMS 25.1.3  r4e34d435fbd Released Oct 30, 2018 WEX-WEI x86 64bit/MS Windows 04/02/19 17:40:44 Page 2
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Include File Summary
+
+
+   SEQ   GLOBAL TYPE      PARENT   LOCAL  FILENAME
+
+     1        1 INPUT          0       0  C:\Users\AVazquezAlcocer.AD\Dropbox\SD
+                                          P for Constructing Designs\MINL_PROBLE
+                                          MS\Mixture\First-Order\Scenario321\Dop
+                                          timal_MINLP.gms
+     2      142 GDXIN          1     142  C:\Users\AVazquezAlcocer.AD\Dropbox\SD
+                                          P for Constructing Designs\MINL_PROBLE
+                                          MS\Mixture\First-Order\Scenario321\in.
+                                          gdx
+
+
+COMPILATION TIME     =        0.000 SECONDS
+      3 MB  25.1.3 r4e34d435fbd WEX-WEI
+GAMS 25.1.3  r4e34d435fbd Released Oct 30, 2018 WEX-WEI x86 64bit/MS Windows 04/02/19 17:40:44 Page 3
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Model Statistics    SOLVE D_opt Using MINLP From line 185
+
+
+MODEL STATISTICS
+
+BLOCKS OF EQUATIONS          11     SINGLE EQUATIONS           89
+BLOCKS OF VARIABLES           6     SINGLE VARIABLES          110
+NON ZERO ELEMENTS           586     NON LINEAR N-Z            423
+DERIVATIVE POOL              20     CONSTANT POOL              17
+CODE LENGTH                 814     DISCRETE VARIABLES         13
+
+
+GENERATION TIME      =        0.031 SECONDS
+      4 MB  25.1.3 r4e34d435fbd WEX-WEI
+
+
+EXECUTION TIME       =        0.031 SECONDS
+      4 MB  25.1.3 r4e34d435fbd WEX-WEI
+GAMS 25.1.3  r4e34d435fbd Released Oct 30, 2018 WEX-WEI x86 64bit/MS Windows 04/02/19 17:40:44 Page 4
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Solution Report     SOLVE D_opt Using MINLP From line 185
+
+
+               S O L V E      S U M M A R Y
+
+     MODEL   D_opt               OBJECTIVE  detA
+     TYPE    MINLP               DIRECTION  MAXIMIZE
+     SOLVER  SCIP                FROM LINE  185
+
+**** SOLVER STATUS     1 Normal Completion         
+**** MODEL STATUS      8 Integer Solution          
+**** OBJECTIVE VALUE               -1.6564
+
+ RESOURCE USAGE, LIMIT          2.000     14400.000
+ ITERATION COUNT, LIMIT      1584    2000000000
+ EVALUATION ERRORS              0          1000
+
+SCIP             25.1.3 r4e34d435fbd Released Oct 30, 2018 WEI x86 64bit/MS Wi
+
+---- EQU vec_fim1  derivatives
+
+      LOWER     LEVEL     UPPER
+
+1       .         .         .         
+2       .         .         .         
+3       .         .         .         
+4       .         .         .         
+5       .         .         .         
+6       .         .         .         
+7       .         .         .         
+8       .         .         .         
+9       .         .         .         
+10      .         .         .         
+11      .         .         .         
+12      .         .         .         
+13      .         .         .         
+
+---- EQU vec_fim2  derivatives
+
+      LOWER     LEVEL     UPPER
+
+1       .         .         .         
+2       .         .         .         
+3       .         .         .         
+4       .         .         .         
+5       .         .         .         
+6       .         .         .         
+7       .         .         .         
+8       .         .         .         
+9       .         .         .         
+10      .         .         .         
+11      .         .         .         
+12      .         .         .         
+13      .         .         .         
+
+---- EQU vec_fim3  derivatives
+
+      LOWER     LEVEL     UPPER
+
+1       .         .         .         
+2       .         .         .         
+3       .         .         .         
+4       .         .         .         
+5       .         .         .         
+6       .         .         .         
+7       .         .         .         
+8       .         .         .         
+9       .         .         .         
+10      .         .         .         
+11      .         .         .         
+12      .         .         .         
+13      .         .         .         
+
+---- EQU mat_fim  terms of the FIM after summing
+
+       LOWER     LEVEL     UPPER
+
+1.1      .    1.5083E-8      .         
+1.2      .         .         .         
+1.3      .         .         .         
+2.1      .         .         .         
+2.2      .    1.4978E-8      .         
+2.3      .         .         .         
+3.1      .         .         .         
+3.2      .         .         .         
+3.3      .    1.6822E-8      .         
+
+---- EQU eq_l  terms of L matrix
+
+       LOWER     LEVEL     UPPER
+
+1.1      .         .         .         
+2.1      .         .         .         
+2.2      .         .         .         
+3.1      .         .         .         
+3.2      .         .         .         
+3.3      .         .         .         
+
+---- EQU eq_u1  terms of L matrix =0
+
+       LOWER     LEVEL     UPPER
+
+1.2      .         .         .         
+1.3      .         .         .         
+2.3      .         .         .         
+
+---- EQU chol_sta  Cholesky factorization stability criteria
+
+       LOWER     LEVEL     UPPER
+
+1.1      .        0.308     +INF       
+2.2      .        0.308     +INF       
+3.3      .        0.385     +INF       
+
+---- EQU ing_avail  ingredient availability constraints
+
+     LOWER     LEVEL     UPPER
+
+1     -INF      4.000     4.000      
+2     -INF      4.000     4.000      
+3     -INF      5.000     5.000      
+
+---- EQU ord_nw  ordering points constraint
+
+      LOWER     LEVEL     UPPER
+
+2       .         .        +INF       
+3       .         .        +INF       
+4       .         .        +INF       
+5       .         .        +INF       
+6       .         .        +INF       
+7       .         .        +INF       
+8       .         .        +INF       
+9       .         .        +INF       
+10      .         .        +INF       
+11      .         .        +INF       
+12      .         .        +INF       
+13      .         .        +INF       
+
+---- EQU const_mixt  constraints on mixtures
+
+      LOWER     LEVEL     UPPER
+
+1      1.000     1.000     1.000      
+2      1.000     1.000     1.000      
+3      1.000     1.000     1.000      
+4      1.000     1.000     1.000      
+5      1.000     1.000     1.000      
+6      1.000     1.000     1.000      
+7      1.000     1.000     1.000      
+8      1.000     1.000     1.000      
+9      1.000     1.000     1.000      
+10     1.000     1.000     1.000      
+11     1.000     1.000     1.000      
+12     1.000     1.000     1.000      
+13     1.000     1.000     1.000      
+
+                       LOWER     LEVEL     UPPER
+
+---- EQU eq_det          .         .         .         
+
+  eq_det  determinant computation - D-optimality
+
+---- VAR x  variable x - positions of the design points
+
+        LOWER     LEVEL     UPPER
+
+1.1       .         .        1.000      
+1.2       .         .        1.000      
+1.3       .        1.000     1.000      
+1.4       .         .        1.000      
+1.5       .        1.000     1.000      
+1.6       .         .        1.000      
+1.7       .        1.000     1.000      
+1.8       .        1.000     1.000      
+1.9       .         .        1.000      
+1.10      .         .        1.000      
+1.11      .         .        1.000      
+1.12      .         .        1.000      
+1.13      .         .        1.000      
+2.1       .        1.000     1.000      
+2.2       .         .        1.000      
+2.3       .         .        1.000      
+2.4       .        1.000     1.000      
+2.5       .         .        1.000      
+2.6       .        1.000     1.000      
+2.7       .         .        1.000      
+2.8       .         .        1.000      
+2.9       .         .        1.000      
+2.10      .         .        1.000      
+2.11      .        1.000     1.000      
+2.12      .         .        1.000      
+2.13      .         .        1.000      
+3.1       .         .        1.000      
+3.2       .        1.000     1.000      
+3.3       .         .        1.000      
+3.4       .         .        1.000      
+3.5       .         .        1.000      
+3.6       .         .        1.000      
+3.7       .         .        1.000      
+3.8       .         .        1.000      
+3.9       .        1.000     1.000      
+3.10      .        1.000     1.000      
+3.11      .         .        1.000      
+3.12      .        1.000     1.000      
+3.13      .        1.000     1.000      
+
+---- VAR dif_th  derivatives wrt parameters
+
+        LOWER     LEVEL     UPPER
+
+1.1     -0.100      .        1.100      
+1.2     -0.100      .        1.100      
+1.3     -0.100     1.000     1.100      
+1.4     -0.100      .        1.100      
+1.5     -0.100     1.000     1.100      
+1.6     -0.100      .        1.100      
+1.7     -0.100     1.000     1.100      
+1.8     -0.100     1.000     1.100      
+1.9     -0.100      .        1.100      
+1.10    -0.100      .        1.100      
+1.11    -0.100      .        1.100      
+1.12    -0.100      .        1.100      
+1.13    -0.100      .        1.100      
+2.1     -0.100     1.000     1.100      
+2.2     -0.100      .        1.100      
+2.3     -0.100      .        1.100      
+2.4     -0.100     1.000     1.100      
+2.5     -0.100      .        1.100      
+2.6     -0.100     1.000     1.100      
+2.7     -0.100      .        1.100      
+2.8     -0.100      .        1.100      
+2.9     -0.100      .        1.100      
+2.10    -0.100      .        1.100      
+2.11    -0.100     1.000     1.100      
+2.12    -0.100      .        1.100      
+2.13    -0.100      .        1.100      
+3.1     -0.100      .        1.100      
+3.2     -0.100     1.000     1.100      
+3.3     -0.100      .        1.100      
+3.4     -0.100      .        1.100      
+3.5     -0.100      .        1.100      
+3.6     -0.100      .        1.100      
+3.7     -0.100      .        1.100      
+3.8     -0.100      .        1.100      
+3.9     -0.100     1.000     1.100      
+3.10    -0.100     1.000     1.100      
+3.11    -0.100      .        1.100      
+3.12    -0.100     1.000     1.100      
+3.13    -0.100     1.000     1.100      
+
+---- VAR fim_th  FIM
+
+       LOWER     LEVEL     UPPER
+
+1.1    -0.100     0.308    13.100      
+1.2    -0.100 -1.000E-9    13.100      
+1.3    -0.100 -1.000E-9    13.100      
+2.1    -0.100 -1.000E-9    13.100      
+2.2    -0.100     0.308    13.100      
+2.3    -0.100 -1.000E-9    13.100      
+3.1    -0.100 -1.000E-9    13.100      
+3.2    -0.100 -1.000E-9    13.100      
+3.3    -0.100     0.385    13.100      
+
+---- VAR lm  matrix L
+
+       LOWER     LEVEL     UPPER
+
+1.1 1.0000E-5     0.555     4.606      
+1.2    -4.606      .        4.606      
+1.3    -4.606      .        4.606      
+2.1    -4.606 -1.336E-8     4.606      
+2.2 1.0000E-5     0.555     4.606      
+2.3    -4.606      .        4.606      
+3.1    -4.606 -1.353E-8     4.606      
+3.2    -4.606 -1.518E-8     4.606      
+3.3 1.0000E-5     0.620     4.606      
+
+                       LOWER     LEVEL     UPPER
+
+---- VAR detA         -50.000    -1.656    50.000      
+
+  detA  determinant
+
+---- VAR y  variables y - decision of including support point or not
+
+      LOWER     LEVEL     UPPER
+
+1       .        1.000     1.000      
+2       .        1.000     1.000      
+3       .        1.000     1.000      
+4       .        1.000     1.000      
+5       .        1.000     1.000      
+6       .        1.000     1.000      
+7       .        1.000     1.000      
+8       .        1.000     1.000      
+9       .        1.000     1.000      
+10      .        1.000     1.000      
+11      .        1.000     1.000      
+12      .        1.000     1.000      
+13      .        1.000     1.000      
+
+
+**** REPORT SUMMARY :        0     NONOPT
+                             0 INFEASIBLE
+                             0  UNBOUNDED
+                             0     ERRORS
+                            11  PROJECTED
+GAMS 25.1.3  r4e34d435fbd Released Oct 30, 2018 WEX-WEI x86 64bit/MS Windows 04/02/19 17:40:44 Page 5
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+E x e c u t i o n
+
+
+EXECUTION TIME       =        0.000 SECONDS
+      3 MB  25.1.3 r4e34d435fbd WEX-WEI
+
+
+USER: GAMS Development Corporation, USA              G871201/0000CA-ANY
+      Free Demo, +1 202-342-0180, support@gams.com, www.gams.com DC0000
+
+
+**** FILE SUMMARY
+
+Input      C:\Users\AVazquezAlcocer.AD\Dropbox\SDP for Constructing Designs\MINL
+           _PROBLEMS\Mixture\First-Order\Scenario321\Doptimal_MINLP.gms
+Output     C:\Users\AVazquezAlcocer.AD\Dropbox\SDP for Constructing Designs\MINL
+           _PROBLEMS\Mixture\First-Order\Scenario321\Doptimal_MINLP.lst

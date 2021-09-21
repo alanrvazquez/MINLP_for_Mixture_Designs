@@ -1,0 +1,51 @@
+[PROJECT]
+
+[OPENWINDOW_1]
+MAXIM=0
+TOP=50
+LEFT=50
+HEIGHT=400
+WIDTH=400
+
+[SOLVERS]
+CNS=SCIP
+DNLP=SCIP
+MINLP=SCIP
+MIP=SCIP
+MIQCP=SCIP
+NLP=SCIP
+QCP=SCIP
+RMINLP=SCIP
+RMIQCP=SCIP
+
+[RP:IOPTIMAL_PROBLEM]
+1=
+
+[GDXDISP: yguess Par 1]
+PlaneDim=0
+RowDim=1
+Squeeze=1
+SqTrail0=0
+Order=1
+Decim=7
+PlaneRownr=-1
+
+[RP:IOPTIMAL_PROBLEM41]
+1=
+
+[RP:DOPTIMAL_MINLP_SCENARIO332]
+1=
+
+[RP:DOPTIMAL_MINLP]
+1=
+
+[MRUFILES]
+1=C:\Users\u0123029\Dropbox\SDP for Constructing Designs\MINL_PROBLEMS\Mixture\Doptimal Project\First-Order\Scenario311\Doptimal_MINLP.gms
+2=C:\Users\u0123029\Dropbox\SDP for Constructing Designs\MINL_PROBLEMS\Mixture\Doptimal Project\Second-Order\Scenario332\Doptimal_MINLP_Scenario332.gms
+3=C:\Users\u0123029\Dropbox\SDP for Constructing Designs\MINL_PROBLEMS\Mixture\Ioptimal Project\First-Order\Scenario41\Ioptimal_problem41.gms
+4=C:\Users\u0123029\Dropbox\SDP for Constructing Designs\MINL_PROBLEMS\Mixture\Ioptimal Project\First-Order\Scenario41\in.gdx
+5=C:\Users\AVazquezAlcocer.AD\Dropbox\SDP for Constructing Designs\MINL_PROBLEMS\Mixture\Ioptimal Project\First-Order\Scenario41\Ioptimal_problem.lst
+6=C:\Users\AVazquezAlcocer.AD\Dropbox\SDP for Constructing Designs\MINL_PROBLEMS\Mixture\Ioptimal Project\First-Order\Scenario41\Ioptimal_problem.gms
+7=C:\Users\u0123029\Dropbox\SDP for Constructing Designs\MINL_PROBLEMS\Mixture\Ioptimal Project\First-Order\Scenario331\Ioptimal_problem.gms
+8=C:\Users\AVazquezAlcocer.AD\Dropbox\SDP for Constructing Designs\MINL_PROBLEMS\Mixture\Ioptimal Project\First-Order\Scenario331\Ioptimal_problem.lst
+9=C:\Users\AVazquezAlcocer.AD\Dropbox\SDP for Constructing Designs\MINL_PROBLEMS\Mixture\Ioptimal Project\First-Order\Scenario331\Ioptimal_problem.gms

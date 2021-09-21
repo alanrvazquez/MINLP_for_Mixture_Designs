@@ -1,0 +1,30 @@
+B 2 C o m p i l a t i o n
+B 212 Model Statistics    SOLVE D_opt Using MINLP From line 196
+B 230 Solution Report     SOLVE D_opt Using MINLP From line 196
+F 253 vec_fim1
+F 271 vec_fim2
+F 289 vec_fim3
+F 307 ord_x
+F 324 symm_fim
+F 330 est_model1
+F 331 est_model2
+F 332 est_model3
+F 342 mat_fim
+F 356 eq_l
+F 367 eq_u1
+F 375 chol_sta
+F 383 ing_avail
+F 391 ord_nw
+F 408 const_mixt
+F 426 lin_iav_1
+F 470 lin_iav_2
+F 514 lin_iav_3
+F 556 eq_det
+G 559 x
+G 603 dif_th
+G 647 fim_th
+G 661 lm
+G 675 detA
+G 681 z
+G 725 y
+B 752 E x e c u t i o n

@@ -1,0 +1,84 @@
+--- Job MODEL.gms Start 05/04/19 11:30:04 25.1.1 r66732 LEX-LEG x86 64bit/Linux
+GAMS 25.1.1   Copyright (C) 1987-2018 GAMS Development. All rights reserved
+Licensee: NEOS server license                            G181108/0001AS-LNX
+          University of Wisconsin-Madison, Computer Sciences Dept.   DC8499
+          License for teaching and research at degree granting institutions
+          License Admin: Michael C. Ferris, ferris@cs.wisc.edu             
+--- Starting compilation
+--- MODEL.gms(149) 3 Mb
+--- GDXin=/var/lib/condor/execute/dir_942919/in.gdx
+--- MODEL.gms(206) 3 Mb
+--- Starting execution: elapsed 0:00:00.002
+--- MODEL.gms(181) 4 Mb
+--- Generating MINLP model D_opt
+--- MODEL.gms(198) 6 Mb
+---   59 rows  68 columns  340 non-zeroes
+---   490 nl-code  243 nl-non-zeroes
+---   7 discrete-columns
+--- MODEL.gms(198) 4 Mb
+--- Executing BARON: elapsed 0:00:00.005
+
+GAMS/BARON       25.1.1 r66732 Released May 19, 2018 LEG x86 64bit/Linux      
+
+--- Using Option File
+*** Error Cannot open parameter file "/var/lib/condor/execute/dir_942919/baron.opt"
+*** Error Error code = 2; No such file or directory
+===========================================================================
+ BARON version 18.5.8. Built: LNX-64 Tue May 8 15:56:42 EDT 2018 
+
+ BARON is a product of The Optimization Firm, LLC. http://www.minlp.com/
+
+ If you use this software, please cite publications from
+ http://www.minlp.com/about-baron, such as: 
+
+ Kilinc, M. and N. V. Sahinidis, Exploiting integrality in the global
+ optimization of mixed-integer nonlinear programming problems in BARON,
+ Optimization Methods and Software, 33, 540-562, 2018.
+===========================================================================
+ This BARON run may utilize the following subsolver(s)
+ For LP/MIP: ILOG CPLEX                                      
+ For NLP: MINOS, SNOPT, GAMS external NLP, IPOPT, FILTERSD, FILTERSQP
+===========================================================================
+ Doing local search
+ Preprocessing found feasible solution with value -1.86375862341     
+ Solving bounding LP
+ Starting multi-start local search
+ Preprocessing found feasible solution with value -1.86373998601     
+ Done with local search
+===========================================================================
+  Iteration    Open nodes         Time (s)    Lower bound      Upper bound
+          1             1             0.09    -1.86374         -1.70453    
+*       179           110             1.77    -1.86372         -1.70453    
+*       380           164             3.71    -1.86029         -1.79315    
+*      1074           250            10.42    -1.82025         -1.79868    
+*      1100           255            10.65    -1.82023         -1.79869    
+*      1682            47            14.57    -1.82021         -1.80655    
+       1780             0            15.15    -1.82021         -1.82019    
+
+ Cleaning up
+
+                         *** Normal completion ***            
+
+ Wall clock time:                    16.00
+ Total CPU time used:                15.15
+
+ Total no. of BaR iterations:    1780
+ Best solution found at node:    1780
+ Max. no. of nodes in memory:     421
+ 
+ All done
+===========================================================================
+
+Solution      = -1.82021302909856  found at node 1780
+Best possible = -1.82019482715
+Absolute gap  = 1.82019485552853E-5  optca = 1E-6
+Relative gap  = 9.99990015690619E-6  optcr = 1E-5
+  (Note that BARON uses a different formula to compute the relative gap as
+   was used for the above reported value.)
+
+--- Restarting execution
+--- MODEL.gms(198) 2 Mb
+--- Reading solution for model D_opt
+--- MODEL.gms(203) 3 Mb
+*** Status: Normal completion
+--- Job MODEL.gms Stop 05/04/19 11:30:20 elapsed 0:00:15.185

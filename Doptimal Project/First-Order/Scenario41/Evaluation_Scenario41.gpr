@@ -1,0 +1,86 @@
+[PROJECT]
+
+[GDXDISP: yguess Par 1]
+PlaneDim=0
+RowDim=1
+Squeeze=1
+SqTrail0=0
+Order=1
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: Dguess Par 2]
+PlaneDim=0
+RowDim=2
+Squeeze=1
+SqTrail0=0
+Order=1,2
+Decim=7
+PlaneRownr=-1
+
+[GDXDISP: Lguess Par 2]
+PlaneDim=0
+RowDim=2
+Squeeze=1
+SqTrail0=0
+Order=1,2
+Decim=7
+PlaneRownr=-1
+
+[RP:DOPTIMAL_MINLP_SCENARIO332]
+1=
+
+[RP:DOPTIMAL_MINLP_SCENARIO322]
+1=
+
+[RP:DOPTIMAL_MINLP_SCENARIO312]
+1=
+
+[RP:IOPTIMAL_PROBLEM311]
+1=
+
+[RP:IOPTIMAL_PROBLEM321]
+1=
+
+[RP:IOPTIMAL_PROBLEM331]
+1=
+
+[RP:IOPTIMAL_PROBLEM41]
+1=
+
+[RP:IOPTIMAL_PROBLEM332]
+1=
+
+[RP:IOPTIMAL_PROBLEM42]
+1=
+
+[RP:IOPTIMAL_PROBLEM322]
+1=
+
+[RP:IOPTIMAL_PROBLEM312]
+1=
+
+[RP:DOPTIMAL_MINLP]
+1=
+
+[RP:AOPTIMAL_MINL_PROGRAM]
+1=
+
+[MRUFILES]
+1=C:\Users\AVazquezAlcocer.AD\Dropbox\SDP for Constructing Designs\MINL_PROBLEMS\Mixture\Lineariation_constraint\Doptimal Project\First-Order\Scenario41\Doptimal_MINLP.gms
+2=C:\Users\AVazquezAlcocer.AD\Dropbox\SDP for Constructing Designs\MINL_PROBLEMS\Mixture\Doptimal Project\First-Order\Scenario41\Doptimal_MINLP.gms
+3=C:\Users\AVazquezAlcocer.AD\Dropbox\SDP for Constructing Designs\MINL_PROBLEMS\Mixture\Ioptimal Project\Second-Order\Scenario312\Ioptimal_problem312.gms
+4=C:\Users\AVazquezAlcocer.AD\Dropbox\SDP for Constructing Designs\MINL_PROBLEMS\Mixture\Ioptimal Project\Second-Order\Scenario322\Ioptimal_problem322.gms
+5=C:\Users\AVazquezAlcocer.AD\Dropbox\SDP for Constructing Designs\MINL_PROBLEMS\Mixture\Ioptimal Project\Second-Order\Scenario42\Ioptimal_problem42.gms
+6=C:\Users\AVazquezAlcocer.AD\Dropbox\SDP for Constructing Designs\MINL_PROBLEMS\Mixture\Ioptimal Project\Second-Order\Scenario332\Ioptimal_problem332.gms
+7=C:\Users\AVazquezAlcocer.AD\Dropbox\SDP for Constructing Designs\MINL_PROBLEMS\Mixture\Ioptimal Project\First-Order\Scenario41\Ioptimal_problem41.gms
+8=C:\Users\AVazquezAlcocer.AD\Dropbox\SDP for Constructing Designs\MINL_PROBLEMS\Mixture\Ioptimal Project\First-Order\Scenario331\Ioptimal_problem331.gms
+
+[OPENWINDOW_1]
+FILE0=C:\Users\AVazquezAlcocer.AD\Dropbox\QBoptimalDesigns\Qb_optimization_programs\Compute_Aoptimal_Designs\Aoptimal_MINL_program.gms
+FILE1=C:\Users\AVazquezAlcocer.AD\Dropbox\QBoptimalDesigns\Qb_optimization_programs\Compute_Aoptimal_Designs\Aoptimal_MINL_program.gms
+MAXIM=1
+TOP=50
+LEFT=65
+HEIGHT=400
+WIDTH=400

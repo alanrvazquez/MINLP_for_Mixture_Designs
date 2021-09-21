@@ -1,0 +1,37 @@
+[PROJECT]
+
+[OPENWINDOW_1]
+MAXIM=1
+TOP=50
+LEFT=50
+HEIGHT=400
+WIDTH=400
+
+[RP:UNTITLED_1]
+1=
+
+[RP:IOPTIMAL_PROBLEM]
+1=
+
+[RP:IOPTIMAL_PROBLEM312]
+1=
+
+[RP:IOPTIMAL_PROBLEM322]
+1=
+
+[RP:IOPTIMAL_PROBLEM42]
+1=
+
+[RP:IOPTIMAL_PROBLEM332]
+1=
+
+[MRUFILES]
+1=C:\Users\AVazquezAlcocer.AD\Dropbox\SDP for Constructing Designs\MINL_PROBLEMS\Mixture\Ioptimal Project\Second-Order\Scenario332\Ioptimal_problem332.gms
+2=C:\Users\AVazquezAlcocer.AD\Dropbox\SDP for Constructing Designs\MINL_PROBLEMS\Mixture\Ioptimal Project\Second-Order\Scenario42\Ioptimal_problem42.gms
+3=C:\Users\AVazquezAlcocer.AD\Dropbox\SDP for Constructing Designs\MINL_PROBLEMS\Mixture\Ioptimal Project\Second-Order\Scenario322\Ioptimal_problem322.gms
+4=C:\Users\AVazquezAlcocer.AD\Dropbox\SDP for Constructing Designs\MINL_PROBLEMS\Mixture\Ioptimal Project\Second-Order\Scenario312\Ioptimal_problem312.gms
+5=C:\Users\AVazquezAlcocer.AD\Dropbox\SDP for Constructing Designs\MINL_PROBLEMS\Mixture\Ioptimal Project\Second-Order\Scenario332\Ioptimal_problem.gms
+6=C:\Users\AVazquezAlcocer.AD\Dropbox\SDP for Constructing Designs\MINL_PROBLEMS\Mixture\Ioptimal Project\Second-Order\Scenario332\Ioptimal_problem.lst
+7=C:\Users\AVazquezAlcocer.AD\Dropbox\SDP for Constructing Designs\MINL_PROBLEMS\Mixture\Ioptimal Project\First-Order\Scenario311\Ioptimal_problem.gms
+8=C:\Users\AVazquezAlcocer.AD\Dropbox\SDP for Constructing Designs\MINL_PROBLEMS\Mixture\Ioptimal Project\First-Order\Scenario311\Ioptimal_problem.lst
+9=C:\Users\u0123029\Dropbox\SDP for Constructing Designs\MINL_PROBLEMS\Mixture\Ioptimal Project\First-Order\Scenario311\Ioptimal_problem.gms

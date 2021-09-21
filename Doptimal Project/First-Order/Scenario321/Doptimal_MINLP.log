@@ -1,0 +1,148 @@
+
+--- Job Doptimal_MINLP.gms Start 06/11/19 16:08:11 26.1.0 rf2b37b9 WEX-WEI x86 64bit/MS Windows
+GAMS 26.1.0   Copyright (C) 1987-2019 GAMS Development. All rights reserved
+Licensee: GAMS Development Corporation, USA              G871201/0000CA-ANY
+          Free Demo, +1 202-342-0180, support@gams.com, www.gams.com DC0000
+--- Starting compilation
+--- Doptimal_MINLP.gms(201) 3 Mb
+--- Starting execution: elapsed 0:00:00.008
+--- Doptimal_MINLP.gms(185) 4 Mb
+--- Generating MINLP model D_opt
+--- Doptimal_MINLP.gms(196) 6 Mb
+---   224 rows  149 columns  853 non-zeroes
+---   694 nl-code  345 nl-non-zeroes
+---   13 discrete-columns
+--- Doptimal_MINLP.gms(196) 4 Mb
+--- Executing SCIP: elapsed 0:00:00.014
+
+SCIP             26.1.0 rf2b37b9 Released Feb 02, 2019 WEI x86 64bit/MS Window
+SCIP version 6.0 (a27ecc0)
+Copyright (C) 2002-2019 Konrad-Zuse-Zentrum fuer Informationstechnik Berlin (ZIB)
+
+External codes: 
+  CPLEX 12.8.0.0       Linear Programming Solver developed by IBM (www.cplex.com)
+  CppAD 20180000.0     Algorithmic Differentiation of C++ algorithms developed by B. Bell (www.coin-or.org/CppAD)
+  Ipopt 3.12           Interior Point Optimizer developed by A. Waechter et.al. (www.coin-or.org/Ipopt)
+  HSL MA27 and MC19    Harwell Subroutine Libraries (www.hsl.rl.ac.uk) from commercially supported Ipopt
+
+reading option file C:\Users\u0123029\Dropbox\SDP for Constructing Designs\MINL_PROBLEMS\Mixture\Lineariation_constraint\Doptimal Project\First-Order\Scenario321\scip.opt
+[../../../ThirdParty/SCIP/scip/src/scip/paramset.c:2569] ERROR: cannot open file <C:\Users\u0123029\Dropbox\SDP for Constructing Designs\MINL_PROBLEMS\Mixture\Lineariation_constraint\Doptimal Project\First-Order\Scenario321\scip.opt> for reading
+C:\Users\u0123029\Dropbox\SDP for Constructing Designs\MINL_PROBLEMS\Mixture\Lineariation_constraint\Doptimal Project\First-Order\Scenario321\scip.opt: No such file or directory
+[../../../ThirdParty/SCIP/scip/src/scip/set.c:3319] ERROR: Error <-4> in function call
+[../../../ThirdParty/SCIP/scip/src/scip/scip_param.c:850] ERROR: Error <-4> in function call
+Reading of optionfile C:\Users\u0123029\Dropbox\SDP for Constructing Designs\MINL_PROBLEMS\Mixture\Lineariation_constraint\Doptimal Project\First-Order\Scenario321\scip.opt failed with SCIP return code <-4>!
+non-default parameter settings:
+limits/time = 14400
+limits/gap = 1e-05
+limits/absgap = 1e-06
+lp/threads = 1
+misc/printreason = FALSE
+misc/usesymmetry = 0
+display/nfrac/active = 2
+display/nexternbranchcands/active = 2
+
+original problem has 149 variables (13 bin, 0 int, 136 cont) and 224 constraints
+
+all 1 solutions given by solution candidate storage are infeasible
+
+presolving:
+(round 1, fast)       57 del vars, 70 del conss, 0 add conss, 95 chg bounds, 0 chg sides, 0 chg coeffs, 1 upgd conss, 0 impls, 9 clqs
+(round 2, fast)       57 del vars, 79 del conss, 0 add conss, 97 chg bounds, 0 chg sides, 0 chg coeffs, 1 upgd conss, 0 impls, 9 clqs
+(round 3, fast)       57 del vars, 79 del conss, 96 add conss, 97 chg bounds, 0 chg sides, 0 chg coeffs, 1 upgd conss, 0 impls, 9 clqs
+(round 4, fast)       57 del vars, 79 del conss, 96 add conss, 97 chg bounds, 0 chg sides, 0 chg coeffs, 106 upgd conss, 0 impls, 9 clqs
+(round 5, fast)       57 del vars, 79 del conss, 96 add conss, 277 chg bounds, 0 chg sides, 0 chg coeffs, 106 upgd conss, 0 impls, 9 clqs
+(round 6, exhaustive) 57 del vars, 79 del conss, 96 add conss, 277 chg bounds, 0 chg sides, 0 chg coeffs, 145 upgd conss, 0 impls, 9 clqs
+   (0.0s) probing cycle finished: starting next cycle
+presolving (7 rounds: 7 fast, 2 medium, 2 exhaustive):
+ 57 deleted vars, 79 deleted constraints, 96 added constraints, 277 tightened bounds, 0 added holes, 0 changed sides, 0 changed coefficients
+ 286 implications, 45 cliques
+presolved problem has 188 variables (10 bin, 0 int, 0 impl, 178 cont) and 241 constraints
+     30 constraints of type <varbound>
+      9 constraints of type <setppc>
+     88 constraints of type <linear>
+     31 constraints of type <abspower>
+     82 constraints of type <quadratic>
+      1 constraints of type <nonlinear>
+Presolving Time: 0.00
+
+ time | node  | left  |LP iter|LP it/n| mem |mdpt |frac |extbr|vars |cons |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+  0.0s|     1 |     0 |   282 |     - |2836k|   0 |   0 |   0 | 188 | 241 | 453 |   0 |   0 |   0 |-7.949157e-02 |      --      |    Inf 
+
+******************************************************************************
+This program contains Ipopt, a library for large-scale nonlinear optimization.
+ Ipopt is released as open source code under the Eclipse Public License (EPL).
+         For more information visit http://projects.coin-or.org/Ipopt
+******************************************************************************
+
+q 0.0s|     1 |     0 |   282 |     - |2965k|   0 |   0 |   0 | 188 | 241 | 393 |   0 |   0 |   0 |-7.949157e-02 |-3.847424e+00 |4740.04%
+  0.0s|     1 |     0 |   282 |     - |2965k|   0 |   0 |   0 | 188 | 241 | 393 |   0 |   0 |   0 |-7.949157e-02 |-3.847424e+00 |4740.04%
+  0.0s|     1 |     0 |   282 |     - |2965k|   0 |   0 |   0 | 188 | 241 | 393 |   0 |   0 |   0 |-7.949157e-02 |-3.847424e+00 |4740.04%
+  0.0s|     1 |     0 |   309 |     - |2965k|   0 |   0 |   0 | 188 | 241 | 400 |   7 |   0 |   0 |-3.569343e-01 |-3.847424e+00 | 977.91%
+  0.0s|     1 |     0 |   309 |     - |2965k|   0 |   0 |   0 | 188 | 241 | 400 |   7 |   0 |   0 |-3.569343e-01 |-3.847424e+00 | 977.91%
+  0.0s|     1 |     0 |   349 |     - |2965k|   0 |   7 |   0 | 188 | 241 | 403 |  10 |   0 |   0 |-5.455766e-01 |-3.847424e+00 | 605.20%
+  0.0s|     1 |     0 |   349 |     - |2985k|   0 |   7 |   0 | 188 | 241 | 403 |  10 |   0 |   0 |-5.455766e-01 |-3.847424e+00 | 605.20%
+  0.0s|     1 |     0 |   378 |     - |3058k|   0 |   7 |   0 | 188 | 241 | 411 |  18 |   0 |   0 |-5.666669e-01 |-3.847424e+00 | 578.96%
+  0.0s|     1 |     0 |   503 |     - |3104k|   0 |  10 |   0 | 188 | 241 | 419 |  26 |   0 |   0 |-7.896735e-01 |-3.847424e+00 | 387.22%
+  0.0s|     1 |     0 |   503 |     - |3107k|   0 |  10 |   0 | 188 | 241 | 419 |  26 |   0 |   0 |-7.896735e-01 |-3.847424e+00 | 387.22%
+  0.0s|     1 |     0 |   621 |     - |3153k|   0 |  10 |   0 | 188 | 241 | 428 |  35 |   0 |   0 |-8.655991e-01 |-3.847424e+00 | 344.48%
+  0.0s|     1 |     0 |   621 |     - |3158k|   0 |  10 |   0 | 188 | 241 | 428 |  35 |   0 |   0 |-8.655991e-01 |-3.847424e+00 | 344.48%
+  0.0s|     1 |     0 |   707 |     - |3313k|   0 |  10 |   0 | 188 | 241 | 440 |  47 |   0 |   0 |-8.966021e-01 |-3.847424e+00 | 329.11%
+  0.0s|     1 |     0 |   729 |     - |3362k|   0 |   9 |   0 | 188 | 241 | 445 |  52 |   0 |   0 |-9.034721e-01 |-3.847424e+00 | 325.85%
+ time | node  | left  |LP iter|LP it/n| mem |mdpt |frac |extbr|vars |cons |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+  0.0s|     1 |     0 |   905 |     - |3414k|   0 |  10 |   0 | 188 | 241 | 453 |  60 |   0 |   0 |-1.332505e+00 |-3.847424e+00 | 188.74%
+  0.0s|     1 |     0 |   905 |     - |3420k|   0 |  10 |   0 | 188 | 241 | 453 |  60 |   0 |   0 |-1.332505e+00 |-3.847424e+00 | 188.74%
+  0.0s|     1 |     0 |   968 |     - |3469k|   0 |  10 |   0 | 188 | 241 | 464 |  71 |   0 |   0 |-1.412667e+00 |-3.847424e+00 | 172.35%
+  0.0s|     1 |     0 |   968 |     - |3475k|   0 |  10 |   0 | 188 | 241 | 464 |  71 |   0 |   0 |-1.412667e+00 |-3.847424e+00 | 172.35%
+  0.0s|     1 |     0 |  1013 |     - |3519k|   0 |   9 |   0 | 188 | 241 | 476 |  83 |   0 |   0 |-1.459423e+00 |-3.847424e+00 | 163.63%
+  0.0s|     1 |     0 |  1046 |     - |3571k|   0 |  10 |   0 | 188 | 241 | 484 |  91 |   0 |   0 |-1.523192e+00 |-3.847424e+00 | 152.59%
+  0.0s|     1 |     0 |  1046 |     - |3577k|   0 |  10 |   0 | 188 | 241 | 484 |  91 |   0 |   0 |-1.523192e+00 |-3.847424e+00 | 152.59%
+  0.0s|     1 |     0 |  1057 |     - |3624k|   0 |  10 |   0 | 188 | 241 | 491 |  98 |   0 |   0 |-1.525153e+00 |-3.847424e+00 | 152.26%
+  0.0s|     1 |     0 |  1076 |     - |3682k|   0 |  10 |   0 | 188 | 241 | 495 | 102 |   0 |   0 |-1.564353e+00 |-3.847424e+00 | 145.94%
+  0.0s|     1 |     0 |  1111 |     - |3739k|   0 |  10 |   0 | 188 | 241 | 283 | 104 |   0 |   0 |-1.564353e+00 |-3.847424e+00 | 145.94%
+  0.0s|     1 |     0 |  1111 |     - |3739k|   0 |  10 |   0 | 188 | 241 | 283 | 104 |   0 |   0 |-1.571194e+00 |-3.847424e+00 | 144.87%
+  0.0s|     1 |     0 |  1142 |     - |3770k|   0 |  10 |   0 | 188 | 241 | 286 | 107 |   0 |   0 |-1.577242e+00 |-3.847424e+00 | 143.93%
+  0.0s|     1 |     0 |  1155 |     - |3802k|   0 |  10 |   0 | 188 | 241 | 291 | 112 |   0 |   0 |-1.636244e+00 |-3.847424e+00 | 135.14%
+  0.0s|     1 |     0 |  1155 |     - |3806k|   0 |  10 |   0 | 188 | 241 | 291 | 112 |   0 |   0 |-1.636244e+00 |-3.847424e+00 | 135.14%
+  0.0s|     1 |     0 |  1161 |     - |3834k|   0 |  10 |   0 | 188 | 241 | 293 | 114 |   0 |   0 |-1.639396e+00 |-3.847424e+00 | 134.69%
+ time | node  | left  |LP iter|LP it/n| mem |mdpt |frac |extbr|vars |cons |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+  0.0s|     1 |     0 |  1169 |     - |3866k|   0 |  10 |   0 | 188 | 241 | 294 | 115 |   0 |   0 |-1.640023e+00 |-3.847424e+00 | 134.60%
+  0.0s|     1 |     0 |  1174 |     - |3897k|   0 |  10 |   0 | 188 | 241 | 297 | 118 |   0 |   0 |-1.643532e+00 |-3.847424e+00 | 134.09%
+  0.0s|     1 |     0 |  1183 |     - |3929k|   0 |  10 |   0 | 188 | 241 | 247 | 119 |   0 |   0 |-1.643532e+00 |-3.847424e+00 | 134.09%
+  0.0s|     1 |     0 |  1183 |     - |3929k|   0 |  10 |   0 | 188 | 241 | 247 | 119 |   0 |   0 |-1.644065e+00 |-3.847424e+00 | 134.02%
+  0.0s|     1 |     0 |  1186 |     - |3956k|   0 |  10 |   0 | 188 | 241 | 249 | 121 |   0 |   0 |-1.644658e+00 |-3.847424e+00 | 133.93%
+  0.0s|     1 |     0 |  1188 |     - |3984k|   0 |  10 |   0 | 188 | 241 | 250 | 122 |   0 |   0 |-1.644724e+00 |-3.847424e+00 | 133.93%
+  0.0s|     1 |     0 |  1189 |     - |3986k|   0 |  10 |   0 | 188 | 241 | 251 | 123 |   0 |   0 |-1.644757e+00 |-3.847424e+00 | 133.92%
+  0.0s|     1 |     0 |  1190 |     - |3989k|   0 |  10 |   0 | 188 | 241 | 252 | 124 |   0 |   0 |-1.644763e+00 |-3.847424e+00 | 133.92%
+  0.0s|     1 |     0 |  1191 |     - |3991k|   0 |  10 |   0 | 188 | 241 | 253 | 125 |   0 |   0 |-1.644834e+00 |-3.847424e+00 | 133.91%
+  0.0s|     1 |     0 |  1192 |     - |3995k|   0 |  10 |   0 | 188 | 241 | 230 | 125 |   0 |   0 |-1.644834e+00 |-3.847424e+00 | 133.91%
+  0.0s|     1 |     0 |  1192 |     - |3995k|   0 |  10 |   0 | 188 | 241 | 230 | 125 |   0 |   0 |-1.644845e+00 |-3.847424e+00 | 133.91%
+  0.0s|     1 |     0 |  1193 |     - |3998k|   0 |  10 |   0 | 188 | 241 | 231 | 126 |   0 |   0 |-1.644845e+00 |-3.847424e+00 | 133.91%
+F 0.0s|     1 |     0 |  1275 |     - |4018k|   0 |  10 |   0 | 188 | 241 | 231 | 126 |   0 |   0 |-1.644845e+00 |-1.656411e+00 |   0.70%
+  0.0s|     1 |     0 |  1275 |     - |4018k|   0 |  10 |   0 | 188 | 241 | 231 | 126 |   0 |   0 |-1.644845e+00 |-1.656411e+00 |   0.70%
+  0.0s|     1 |     0 |  1284 |     - |4018k|   0 |  10 |   0 | 188 | 241 | 235 | 130 |   0 |   0 |-1.650824e+00 |-1.656411e+00 |   0.34%
+ time | node  | left  |LP iter|LP it/n| mem |mdpt |frac |extbr|vars |cons |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+  0.0s|     1 |     0 |  1284 |     - |4020k|   0 |  10 |   0 | 188 | 241 | 235 | 130 |   0 |   0 |-1.650824e+00 |-1.656411e+00 |   0.34%
+  0.0s|     1 |     0 |  1291 |     - |4020k|   0 |  10 |   0 | 188 | 241 | 236 | 131 |   0 |   0 |-1.652166e+00 |-1.656411e+00 |   0.26%
+  0.0s|     1 |     0 |  1291 |     - |4022k|   0 |  10 |   0 | 188 | 241 | 236 | 131 |   0 |   0 |-1.652166e+00 |-1.656411e+00 |   0.26%
+  0.0s|     1 |     2 |  1291 |     - |4046k|   0 |  10 |   0 | 188 | 241 | 236 | 131 |   0 |  10 |-1.652166e+00 |-1.656411e+00 |   0.26%
+r 0.0s|    36 |    18 |  1629 |  16.7 |4130k|  17 |   - |   0 | 188 | 221 | 282 | 345 |   0 |  17 |-1.654313e+00 |-1.656411e+00 |   0.13%
+r 1.0s|    54 |     3 |  1831 |  14.8 |4134k|  17 |   - |   0 | 188 | 221 | 276 | 414 |   0 |  17 |-1.654313e+00 |-1.656411e+00 |   0.13%
+
+SCIP Status        : problem is solved [optimal solution found]
+Solving Time (sec) : 1.00
+Solving Nodes      : 57
+Primal Bound       : -1.65641065099252e+00 (4 solutions)
+Dual Bound         : -1.65641065099252e+00
+Gap                : 0.00 %
+
+
+--- Restarting execution
+--- Doptimal_MINLP.gms(196) 2 Mb
+--- Reading solution for model D_opt
+***
+*** Solver did not provide marginals for model D_opt
+***
+--- Executing after solve: elapsed 0:00:01.023
+--- Doptimal_MINLP.gms(201) 3 Mb
+*** Status: Normal completion
+--- Job Doptimal_MINLP.gms Stop 06/11/19 16:08:12 elapsed 0:00:01.024

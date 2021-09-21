@@ -1,0 +1,18 @@
+
+--- Job Doptimal_MINLP.gms Start 06/11/19 16:10:04 26.1.0 rf2b37b9 WEX-WEI x86 64bit/MS Windows
+GAMS 26.1.0   Copyright (C) 1987-2019 GAMS Development. All rights reserved
+Licensee: GAMS Development Corporation, USA              G871201/0000CA-ANY
+          Free Demo, +1 202-342-0180, support@gams.com, www.gams.com DC0000
+--- Starting compilation
+--- Doptimal_MINLP.gms(201) 3 Mb
+--- Starting execution: elapsed 0:00:00.007
+--- Doptimal_MINLP.gms(185) 4 Mb
+--- Generating MINLP model D_opt
+--- Doptimal_MINLP.gms(196) 6 Mb
+---   314 rows  209 columns  1,219 non-zeroes
+---   964 nl-code  489 nl-non-zeroes
+---   19 discrete-columns
+*** Status: Terminated due to a licensing error
+***         Inspect listing file for more information
+--- Job Doptimal_MINLP.gms Stop 06/11/19 16:10:04 elapsed 0:00:00.015
+Exit code = 7

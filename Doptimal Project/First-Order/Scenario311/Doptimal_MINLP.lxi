@@ -1,0 +1,50 @@
+B 2 C o m p i l a t i o n
+B 245 Equation Listing    SOLVE D_opt Using MINLP From line 225
+D 246 vec_fim1
+D 264 vec_fim2
+D 281 vec_fim3
+D 298 ord_x
+D 313 est_model1
+D 318 est_model2
+D 323 est_model3
+D 328 mat_fim
+D 427 symm_fim
+D 436 eq_l
+D 463 eq_u1
+D 472 chol_sta
+D 481 ing_avail
+D 493 ord_nw
+D 508 const_mixt
+D 525 lin_iav_1
+D 570 lin_iav_2
+D 615 lin_iav_3
+D 660 eq_det
+B 668 Model Statistics    SOLVE D_opt Using MINLP From line 225
+B 688 Solution Report     SOLVE D_opt Using MINLP From line 225
+F 711 vec_fim1
+F 723 vec_fim2
+F 735 vec_fim3
+F 747 ord_x
+F 756 est_model1
+F 757 est_model2
+F 758 est_model3
+F 768 mat_fim
+F 782 symm_fim
+F 790 eq_l
+F 801 eq_u1
+F 809 chol_sta
+F 817 ing_avail
+F 825 ord_nw
+F 836 const_mixt
+F 848 lin_iav_1
+F 874 lin_iav_2
+F 900 lin_iav_3
+F 924 eq_det
+G 927 x
+G 953 dif_th
+G 979 fim_th
+G 993 lm
+G 1007 detA
+G 1013 z
+G 1039 y
+B 1060 E x e c u t i o n

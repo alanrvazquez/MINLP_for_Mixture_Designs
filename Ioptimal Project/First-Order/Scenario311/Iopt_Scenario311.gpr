@@ -1,0 +1,61 @@
+[PROJECT]
+
+[RP:UNTITLED_1]
+1=
+
+[RP:IOPTIMAL_PROBLEM]
+1=
+
+[GDXDISP: yguess Par 1]
+PlaneDim=0
+RowDim=1
+Squeeze=1
+SqTrail0=0
+Order=1
+Decim=7
+PlaneRownr=-1
+
+[OPENWINDOW_1]
+MAXIM=0
+TOP=50
+LEFT=50
+HEIGHT=586
+WIDTH=1053
+
+[RP:IOPTIMAL_PROBLEM331]
+1=
+
+[RP:IOPTIMAL_PROBLEM321]
+1=
+
+[RP:IOPTIMAL_PROBLEM311]
+1=
+
+[RP:IOPTIMAL_PROBLEM42]
+1=
+
+[RP:IOPTIMAL_PROBLEM332]
+1=
+
+[RP:IOPTIMAL_PROBLEM322]
+1=
+
+[RP:IOPTIMAL_PROBLEM312]
+1=
+
+[RP:IOPTIMAL_PROBLEM41]
+1=
+
+[RP:QOPTIMAL_MINL_PROGRAM]
+1=
+
+[MRUFILES]
+1=C:\Users\u0123029\Dropbox\SDP for Constructing Designs\MINL_PROBLEMS\Qb\Qoptimal_MINL_program.gms
+2=C:\Users\u0123029\Dropbox\SDP for Constructing Designs\MINL_PROBLEMS\Mixture\Lineariation_constraint\Ioptimal Project\First-Order\Scenario41\Ioptimal_problem41.gms
+3=C:\Users\u0123029\Dropbox\SDP for Constructing Designs\MINL_PROBLEMS\Mixture\Lineariation_constraint\Ioptimal Project\Second-Order\Scenario42\Ioptimal_problem42.gms
+4=C:\Users\u0123029\Dropbox\SDP for Constructing Designs\MINL_PROBLEMS\Mixture\Lineariation_constraint\Ioptimal Project\Second-Order\Scenario332\Ioptimal_problem332.gms
+5=C:\Users\u0123029\Dropbox\SDP for Constructing Designs\MINL_PROBLEMS\Mixture\Lineariation_constraint\Ioptimal Project\Second-Order\Scenario322\Ioptimal_problem322.gms
+6=C:\Users\u0123029\Dropbox\SDP for Constructing Designs\MINL_PROBLEMS\Mixture\Lineariation_constraint\Ioptimal Project\Second-Order\Scenario312\Ioptimal_problem312.gms
+7=C:\Users\u0123029\Dropbox\SDP for Constructing Designs\MINL_PROBLEMS\Mixture\Lineariation_constraint\Ioptimal Project\First-Order\Scenario331\Ioptimal_problem331.gms
+8=C:\Users\u0123029\Dropbox\SDP for Constructing Designs\MINL_PROBLEMS\Mixture\Lineariation_constraint\Ioptimal Project\First-Order\Scenario321\Ioptimal_problem321.gms
+9=C:\Users\u0123029\Dropbox\SDP for Constructing Designs\MINL_PROBLEMS\Mixture\Lineariation_constraint\Ioptimal Project\First-Order\Scenario311\Ioptimal_problem311.gms

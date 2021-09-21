@@ -1,0 +1,43 @@
+[PROJECT]
+
+[OPENWINDOW_1]
+MAXIM=1
+TOP=104
+LEFT=104
+HEIGHT=408
+WIDTH=1098
+
+[RP:DOPTIMAL_MINLP]
+1=
+
+[RP:DOPTIMAL_MINLP_SCENARIO332]
+1=
+
+[RP:DOPTIMAL_MINLP_SCENARIO322]
+1=
+
+[RP:DOPTIMAL_MINLP_SCENARIO312]
+1=
+
+[RP:IOPTIMAL_PROBLEM311]
+1=
+
+[RP:IOPTIMAL_PROBLEM321]
+1=
+
+[RP:IOPTIMAL_PROBLEM331]
+1=
+
+[RP:IOPTIMAL_PROBLEM41]
+1=
+
+[MRUFILES]
+1=C:\Users\u0123029\Dropbox\SDP for Constructing Designs\MINL_PROBLEMS\Mixture\Lineariation_constraint\Ioptimal Project\First-Order\Scenario41\Ioptimal_problem41.gms
+2=C:\Users\u0123029\Dropbox\SDP for Constructing Designs\MINL_PROBLEMS\Mixture\Lineariation_constraint\Ioptimal Project\First-Order\Scenario331\Ioptimal_problem331.gms
+3=C:\Users\u0123029\Dropbox\SDP for Constructing Designs\MINL_PROBLEMS\Mixture\Lineariation_constraint\Ioptimal Project\First-Order\Scenario321\Ioptimal_problem321.gms
+4=C:\Users\u0123029\Dropbox\SDP for Constructing Designs\MINL_PROBLEMS\Mixture\Lineariation_constraint\Ioptimal Project\First-Order\Scenario311\Ioptimal_problem311.gms
+5=C:\Users\u0123029\Dropbox\SDP for Constructing Designs\MINL_PROBLEMS\Mixture\Lineariation_constraint\Doptimal Project\Second-Order\Scenario42\Doptimal_MINLP.gms
+6=C:\Users\u0123029\Dropbox\SDP for Constructing Designs\MINL_PROBLEMS\Mixture\Lineariation_constraint\Doptimal Project\Second-Order\Scenario332\Doptimal_MINLP_Scenario332.gms
+7=C:\Users\u0123029\Dropbox\SDP for Constructing Designs\MINL_PROBLEMS\Mixture\Lineariation_constraint\Doptimal Project\Second-Order\Scenario322\Doptimal_MINLP_Scenario322.gms
+8=C:\Users\u0123029\Dropbox\SDP for Constructing Designs\MINL_PROBLEMS\Mixture\Lineariation_constraint\Doptimal Project\Second-Order\Scenario312\Doptimal_MINLP_Scenario312.gms
+9=C:\Users\u0123029\Dropbox\SDP for Constructing Designs\MINL_PROBLEMS\Mixture\Lineariation_constraint\Doptimal Project\First-Order\Scenario41\Doptimal_MINLP.gms

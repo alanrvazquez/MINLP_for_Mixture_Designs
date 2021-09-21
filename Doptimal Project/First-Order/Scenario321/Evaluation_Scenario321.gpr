@@ -1,0 +1,19 @@
+[PROJECT]
+
+[OPENWINDOW_1]
+MAXIM=1
+TOP=50
+LEFT=50
+HEIGHT=400
+WIDTH=400
+
+[RP:DOPTIMAL_MINLP]
+1=
+
+[MRUFILES]
+1=C:\Users\u0123029\Dropbox\SDP for Constructing Designs\MINL_PROBLEMS\Mixture\Lineariation_constraint\Doptimal Project\First-Order\Scenario321\Doptimal_MINLP.gms
+2=C:\Users\u0123029\Dropbox\SDP for Constructing Designs\MINL_PROBLEMS\Mixture\Lineariation_constraint\Doptimal Project\First-Order\Scenario321\Doptimal_MINLP.lst
+3=C:\Users\u0123029\Dropbox\SDP for Constructing Designs\MINL_PROBLEMS\Mixture\Doptimal Project\First-Order\Scenario321\Doptimal_MINLP.gms
+4=C:\Users\u0123029\Dropbox\SDP for Constructing Designs\MINL_PROBLEMS\Mixture\Doptimal Project\First-Order\Scenario321\Doptimal_MINLP.lst
+5=C:\Users\AVazquezAlcocer.AD\Dropbox\SDP for Constructing Designs\MINL_PROBLEMS\Mixture\First-Order\Scenario321\Doptimal_MINLP.gms
+6=C:\Users\AVazquezAlcocer.AD\Dropbox\SDP for Constructing Designs\MINL_PROBLEMS\Mixture\First-Order\Scenario321\Doptimal_MINLP.lst
